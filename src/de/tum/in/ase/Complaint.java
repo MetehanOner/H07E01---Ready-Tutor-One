@@ -1,6 +1,7 @@
 package de.tum.in.ase;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Complaint {
@@ -30,6 +31,11 @@ public class Complaint {
 
     //TODO make a complain on all exams which are still preliminary
     public static List<Complaint> complainAllPreliminary(Stream<Exam> exams) {
-        return null;
+
+         List<Complaint> l = exams
+                 .filter(e -> e.getGrade().getStatus().equals(Status.PRELIMINARY))
+                 .map(exam1 -> new Complaint(exam1, "Plz giv 1.0")).toList();
+
+         return l;
     }
 }

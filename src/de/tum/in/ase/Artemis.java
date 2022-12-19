@@ -1,30 +1,27 @@
 package de.tum.in.ase;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.OptionalDouble;
+import java.util.*;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Artemis {
     // TODO: calculate the average grade of all valid exams
     public static double averageGrade(Stream<Exam> exams) {
 
-
-        double average = exams.parallel()
+        return exams.parallel()
                 .filter(e -> e.getGrade().getStatus().equals(Status.VALID))
                 .mapToDouble(e -> e.getGrade().getValue())
                 .average()
-                .orElse((double) 0);
-
-        return average;
+                .orElse(0);
     }
 
     // TODO: sort all exams by exam date in ascending order
     public static List<Exam> sortExamsByExamDate(Stream<Exam> exams) {
-        return null;
+
+        return exams
+                .sorted(Comparator.comparing(Exam::getExamDate)).toList();
     }
 
     // TODO: return the date of the first exam written
@@ -64,6 +61,7 @@ public class Artemis {
 
         List<Exam> examsList = Arrays.asList(e0, e1, e2, e3, e4);
         System.out.println(averageGrade(examsList.stream()));
+
 
 
     }
