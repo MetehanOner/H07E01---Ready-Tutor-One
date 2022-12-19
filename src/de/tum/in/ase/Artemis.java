@@ -17,7 +17,7 @@ public class Artemis {
                 .filter(e -> e.getGrade().getStatus().equals(Status.VALID))
                 .mapToDouble(e -> e.getGrade().getValue())
                 .average()
-                .orElse(Double.NaN);
+                .orElse((double) 0);
 
         return average;
     }
@@ -50,11 +50,11 @@ public class Artemis {
 
     public static void main(String[] args) {
 
-        Grade a = new Grade(1.0, Status.VALID);
-        Grade b = new Grade(2.0, Status.VALID);
-        Grade c = new Grade(3.0, Status.VALID);
-        Grade d = new Grade(3.3, Status.VALID);
-        Grade e = new Grade(4.7, Status.VALID);
+        Grade a = new Grade(1.0, Status.INVALID);
+        Grade b = new Grade(0.0, Status.INVALID);
+        Grade c = new Grade(0.0, Status.INVALID);
+        Grade d = new Grade(0.0, Status.INVALID);
+        Grade e = new Grade(0.0, Status.INVALID);
 
         Exam e0 = new Exam("mete", a, true, 30, LocalDate.of(2022, 07, 18), LocalDate.now());
         Exam e1 = new Exam("mete", b, true, 30, LocalDate.of(2022, 07, 18), LocalDate.now());
