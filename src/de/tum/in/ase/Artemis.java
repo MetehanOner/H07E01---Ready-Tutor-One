@@ -26,11 +26,15 @@ public class Artemis {
 
     // TODO: return the date of the first exam written
     public static LocalDate dateOfFirstExam(Stream<Exam> exams) {
-        return null;
+
+        return exams
+                .map(Exam::getExamDate)
+                .min(Comparator.comparing(localDate -> localDate)).orElse(null);
     }
 
     // TODO: count how many exams are online and onsite
     public static Map<Boolean, Integer> countByOnline(Stream<Exam> exams) {
+
         return null;
     }
 
