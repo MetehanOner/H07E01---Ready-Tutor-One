@@ -9,9 +9,9 @@ import java.util.stream.Stream;
 public class Artemis {
     // TODO: calculate the average grade of all valid exams
     public static double averageGrade(Stream<Exam> exams) {
-        double sumOfNumbers = exams.filter(e -> e.getGrade().getStatus().equals(Status.VALID)).count();
+        double sumOfNumbers = exams.parallel().filter(e -> e.getGrade().getStatus().equals(Status.VALID)).count();
 
-        double sumOfGrades = exams.filter(e -> e.getGrade().getStatus().equals(Status.VALID)).map(exam -> exam.getGrade().getValue()).reduce(0.0, Double::sum);
+        double sumOfGrades = exams.parallel().filter(e -> e.getGrade().getStatus().equals(Status.VALID)).map(exam -> exam.getGrade().getValue()).reduce(0.0, Double::sum);
 
         return sumOfGrades/sumOfNumbers;
     }
