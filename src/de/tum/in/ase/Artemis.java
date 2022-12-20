@@ -46,12 +46,13 @@ public class Artemis {
 
 	// TODO: create a report using the passed formatter
 	public static String createFormattedReport(Stream<Exam> exams, Formatter formatter) {
-
-        return null;
+        String g = exams.map(e -> formatter.formatExam(e)).toString();
+        return g;
 	}
 
     // TODO: create a simple report string
     public static String createSimpleReport(Stream<Exam> exams) {
+
         return null;
     }
 
