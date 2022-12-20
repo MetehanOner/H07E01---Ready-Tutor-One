@@ -1,5 +1,6 @@
 package de.tum.in.ase;
 
+import java.text.Normalizer;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Function;
@@ -46,13 +47,23 @@ public class Artemis {
 
 	// TODO: create a report using the passed formatter
 	public static String createFormattedReport(Stream<Exam> exams, Formatter formatter) {
+
         return exams.map(e -> formatter.formatExam(e)).collect(Collectors.joining(System.getProperty("line.separator")));
+
 	}
 
     // TODO: create a simple report string
     public static String createSimpleReport(Stream<Exam> exams) {
 
-        return null;
+        Formatter f = new Formatter() {
+            @Override
+            public String formatExam(Exam exam) {
+                return "["+exam.getGrade().getStatus()+"] " +"Exam "+  "\"" + exam.getName() + "\"" +": "+exam.getGrade().getValue();
+
+            }
+        };
+
+        return createFormattedReport(exams, f);
     }
 
     public static void main(String[] args) {
@@ -71,7 +82,7 @@ public class Artemis {
 
         List<Exam> examsList = Arrays.asList(e0, e1, e2, e3, e4);
         System.out.println(averageGrade(examsList.stream()));
-        //System.out.println(createFormattedReport(examsList.stream(), Formatter formatter));
+        System.out.println(createSimpleReport(examsList.stream()));
 
 
 
