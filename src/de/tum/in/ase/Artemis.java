@@ -55,15 +55,12 @@ public class Artemis {
     // TODO: create a simple report string
     public static String createSimpleReport(Stream<Exam> exams) {
 
-        Formatter f = new Formatter() {
+        return createFormattedReport(exams, exam -> new Formatter() {
             @Override
             public String formatExam(Exam exam) {
                 return "["+exam.getGrade().getStatus()+"] " +"Exam "+  "\"" + exam.getName() + "\"" +": "+exam.getGrade().getValue();
-
             }
-        };
-
-        return createFormattedReport(exams, f);
+        }.formatExam(exam));
     }
 
     public static void main(String[] args) {
