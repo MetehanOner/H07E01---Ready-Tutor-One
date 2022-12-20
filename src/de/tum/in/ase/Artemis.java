@@ -46,8 +46,7 @@ public class Artemis {
 
 	// TODO: create a report using the passed formatter
 	public static String createFormattedReport(Stream<Exam> exams, Formatter formatter) {
-        String g = exams.map(e -> formatter.formatExam(e)).toString();
-        return g;
+        return exams.map(e -> formatter.formatExam(e)).collect(Collectors.joining(System.getProperty("line.separator")));
 	}
 
     // TODO: create a simple report string
@@ -72,6 +71,7 @@ public class Artemis {
 
         List<Exam> examsList = Arrays.asList(e0, e1, e2, e3, e4);
         System.out.println(averageGrade(examsList.stream()));
+        //System.out.println(createFormattedReport(examsList.stream(), Formatter formatter));
 
 
 
